@@ -1,0 +1,478 @@
+<!DOCTYPE html>
+<!--[if lt IE 7 ]><html class="ie ie6" lang="en"> <![endif]-->
+<!--[if IE 7 ]><html class="ie ie7" lang="en"> <![endif]-->
+<!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
+<!--[if (gte IE 9)|!(IE)]><!-->
+<html lang="en">
+<!--<![endif]-->
+
+<head>
+
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <meta name="description" content="">
+    <meta name="author" content="">
+    <meta name="keywords" content="">
+
+    <title>Documentation</title>
+
+    <link rel="shortcut icon" href="images/favicon.ico" type="image/x-icon">
+
+    <link rel="stylesheet" type="text/css" href="fonts/font-awesome-4.3.0/css/font-awesome.min.css">
+    <link rel="stylesheet" type="text/css" href="css/stroke.css">
+    <link rel="stylesheet" type="text/css" href="css/bootstrap.css">
+    <link rel="stylesheet" type="text/css" href="css/animate.css">
+    <link rel="stylesheet" type="text/css" href="css/prettyPhoto.css">
+    <link rel="stylesheet" type="text/css" href="css/style.css">
+
+    <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shCore.css" media="all">
+    <link rel="stylesheet" type="text/css" href="js/syntax-highlighter/styles/shThemeRDark.css" media="all">
+
+    <!-- CUSTOM -->
+    <link rel="stylesheet" type="text/css" href="css/custom.css">
+
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!--[if lt IE 9]>
+      <script src="https://oss.maxcdn.com/html5shiv/3.7.2/html5shiv.min.js"></script>
+      <script src="https://oss.maxcdn.com/respond/1.4.2/respond.min.js"></script>
+    <![endif]-->
+
+</head>
+
+<body>
+
+    <div id="wrapper">
+
+        <div class="container">
+
+            <section id="top" class="section docs-heading">
+
+                <div class="row">
+                    <div class="col-md-12">
+                        <div class="big-title text-center">
+                            <h1>Wiki Documentation</h1>
+                        </div>
+                        <!-- end title -->
+                    </div>
+                    <!-- end 12 -->
+                </div>
+                <!-- end row -->
+
+                <hr>
+
+            </section>
+            <!-- end section -->
+
+            <div class="row">
+
+                <div class="col-md-3">
+                    <nav class="docs-sidebar" data-spy="affix" data-offset-top="300" data-offset-bottom="200" role="navigation">
+                        <ul class="nav">
+                            <li><a href="https://trello.com/b/pQWxTb6K/projet-mana"> <img src="images/favicon-32x32.png"> Trello</a></li>
+                            <li><a href="#line1">Les choix des scans & utilités</a></li>
+                            <ul class="nav">
+                                <li><a href="#line1_1">Nmap</a></li>
+                                <li><a href="#line1_2">Firewalk</a></li>
+                                <li><a href="#line1_3">Nessus</a></li>
+                                <li><a href="#line1_4">Grabber</a></li>
+                                <li><a href="#line1_5">Sqlmap</a></li>
+                            </ul>
+                            <li><a href="#line2">Configuration de l’agent Wazuh sur Kali-linux</a></li>
+                            <ul class="nav">
+                                <li><a href="#line2_1">RPM</a></li>
+                                <li><a href="#line2_2">Debian</a></li>
+                            </ul>
+                            <li><a href="#line3">Mise en place du Vnc</a></li>
+                            <li><a href="#line4">Choix de la base de donnée</a></li>
+                            <li><a href="#line5">Collecte des logs suite aux scans</a></li>
+                            <li><a href="#line6">Configuration du VPN</a></li>
+                        </ul>
+                    </nav >
+                </div>
+                <div class="col-md-9">
+                    <section id="line1" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Les choix des scanx & utilités <a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <section id="line1_1" class="section_in">
+                            <div class="col-md-12">
+                                <h4>Nmap :</h4>
+                                <p> Flexible: prend en charge des dizaines de techniques avancées pour mapper des réseaux
+                                    remplis de filtres IP, pare-feu, routeurs et autres obstacles. Cela inclut de nombreux mécanismes d’analyse de
+                                    port (TCP et UDP), la détection de système d’exploitation, la détection de version, les balayages de ping, etc.
+                                    De plus pour avoir Nmap en interface graphic on prend la Zenmap.</p>
+                            </div>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section id="line1_2" class="section_in">
+                                <div class="col-md-12">
+                                    <h4>Firewalk :</h4>
+                                    <p> Est un outil de sécurité réseau de reconnaissance actif qui tente de déterminer les
+                                        protocoles de couche 4 d'un périphérique de transmission IP donné. Firewalk fonctionne en envoyant des
+                                        paquets TCP ou UDP avec un TTL supérieur à la passerelle ciblée. Si la passerelle autorise le trafic, elle
+                                        transmettra les paquets au saut suivant où ils expireront et généreront un message
+                                        ICMP_TIME_EXCEEDED. Si l'hôte de la passerelle n'autorise pas le trafic, il laissera probablement tomber
+                                        les paquets sur le sol et nous ne verrons aucune réponse.</p>
+
+                                    <p> Pour obtenir le protocole TTL IP correct qui aboutira à l'expiration des paquets une fois au-delà de la
+                                        passerelle, nous devons augmenter le nombre de sauts. Nous faisons cela de la même manière que fonctionne
+                                        traceroute. Une fois que nous avons le compte de passerelle de la passerelle (à ce moment-là, l'analyse est
+                                        dite `liée`), nous pouvons commencer notre analyse.</p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section id="line1_3" class="section_in">
+                                <div class="col-md-12">
+                                    <h4>Nessus :</h4>
+                                    <p> Est un outil de sécurité informatique. Il signale les faiblesses potentielles ou avérées sur les
+                                        machines testées.</p>
+
+                                    <p>  Ceci inclut, entre autres :<br> - les services vulnérables à des attaques permettant la prise de contrôle de la machine, l'accès à des
+                                        informations sensibles (lecture de fichiers confidentiels par exemple), des dénis de service...<br>
+                                        - les fautes de configuration (relais de messagerie ouvert par exemple)<br>
+                                        - les patchs de sécurité non appliqués, que les failles corrigées soient exploitables ou non dans la
+                                        configuration testée<br>
+                                        - les mots de passe par défaut, quelques mots de passe communs, et l'absence de mots de passe sur certains
+                                        comptes systèmes. Nessus peut aussi appeler le programme externe Hydra pour attaquer les mots de passe à
+                                        l'aide d'un dictionnaire.<br>
+                                        - les services jugés faibles (on suggère par exemple de remplacer Telnet par SSH)<br>
+                                        - les dénis de service contre la pile TCP/IP</p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section id="line1_4" class="section_in">
+                                <div class="col-md-12">
+                                    <h4>Grabber :</h4>
+                                    <p> Est un scanner d'applications Web. Fondamentalement, il détecte certaines vulnérabilités
+                                        de votre site Web. Grabber est simple, pas rapide mais portable et vraiment adaptable. Ce logiciel est conçu
+                                        pour numériser de petits sites Web tels que des rencontres personnelles, des forums, etc. Ce n’est absolument
+                                        pas une application volumineuse: cela prendrait trop de temps et inonderait votre réseau.</p>
+
+                                     <h5> Caracteristiques: </h5>
+                                    <p>
+                                        • Script intersite<br>
+                                        • Injection SQL (il existe également un module spécial Injection SQL
+                                        aveugle)<br>
+                                        • Inclusion de fichier<br>
+                                        • Vérification des fichiers de sauvegarde<br>
+                                        • Vérification AJAX simple (analyser chaque code JavaScript et obtenir
+                                        l'URL et essayer d'obtenir les paramètres)<br>
+                                        • Analyse hybride / Test de boule de cristal pour une application PHP utilisant
+                                        PHP-SAT<br>
+                                        • Analyseur de code source JavaScript: Evaluation de la qualité / exactitude
+                                        du JavaScript avec JavaScript Lint<br>
+                                        • Génération d'un fichier [session_id, time (t)] pour la prochaine analyse de
+                                        statistiques
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                        <div class="row">
+                            <section id="line1_5" class="section_in">
+                                <div class="col-md-12">
+                                    <h4>Sqlmap :</h4>
+                                    <p> Est un outil de test d'intrusion open source qui automatise le processus de détection et
+                                        d'exploitation des failles d'injection SQL et de prise en charge des serveurs de base de données. Il est livré
+                                        avec un puissant moteur de détection, de nombreuses fonctionnalités de niche pour le testeur de pénétration
+                                        ultime et une large gamme de commutateurs, allant de la prise de empreinte de base de données à la
+                                        récupération de données de la base de données, en passant par l'accès au système de fichiers sous-jacent et
+                                        l'exécution de commandes sur le système d'exploitation. connexions hors bande</p>
+
+
+                                    <p> • Prise en charge complète des systèmes de gestion de bases de données MySQL, Oracle, PostgreSQL,
+                                        Microsoft SQL Server, Microsoft Access, IBM DB2, SQLite, Firebird, Sybase et SAP MaxDB<br>
+
+
+                                        • Prise en charge complète de six techniques d'injection SQL: aveugle basée sur les
+                                        booléens, aveugle basée sur le temps, basée sur les erreurs, requête UNION, requêtes
+                                        empilées et hors bande.<br>
+
+                                        • Prise en charge de la connexion directe à la base de données sans passer par une
+                                        injection SQL, en fournissant les informations d'identification du SGBD, l'adresse IP, le
+                                        port et le nom de la base de données.<br>
+
+                                        • Assistance pour énumérer les utilisateurs, les hachages de mots de passe, les privilèges,
+                                        les rôles, les bases de données, les tables et les colonnes.<br>
+
+                                        • Reconnaissance automatique des formats de hachage de mot de passe et prise en charge
+                                        de leur résolution à l'aide d'une attaque basée sur un dictionnaire.<br>
+
+                                        • Prise en charge du vidage complet des tables de base de données, d'une plage d'entrées
+                                        ou de colonnes spécifiques selon le choix de l'utilisateur. L'utilisateur peut également
+                                        choisir de sauvegarder uniquement une plage de caractères de chaque entrée de colonne.<br>
+
+                                        • Prise en charge de la recherche de noms de bases de données spécifiques, de tables
+                                        spécifiques dans toutes les bases de données ou de colonnes spécifiques dans toutes les
+                                        tables de bases de données. Ceci est utile, par exemple, pour identifier les tables
+                                        contenant les informations d'identification de l'application personnalisée lorsque les
+                                        noms des colonnes pertinentes contiennent des chaînes telles que name et pass.<br>
+
+                                        • Prise en charge du téléchargement de tout fichier à partir du système de fichiers sousjacent du serveur de base de données lorsque le logiciel de base de données est MySQL,
+                                        PostgreSQL ou Microsoft SQL Server.<br>
+
+                                        • Prise en charge de l'exécution de commandes arbitraires et de la récupération de leur
+                                        sortie standard sur le système d'exploitation sous-jacent du serveur de base de données
+                                        lorsque le logiciel de base de données est MySQL, PostgreSQL ou Microsoft SQL
+                                        Server.<br>
+
+                                        • Prise en charge de l’établissement d’une connexion TCP dynamique hors bande entre la
+                                        machine attaquante et le système d’exploitation sous-jacent du serveur de base de
+                                        données. Ce canal peut être une invite de commande interactive, une session Meterpreter
+                                        ou une session VNC (Interface utilisateur graphique) selon le choix de l'utilisateur.<br>
+
+                                        • Prise en charge de l'élévation des privilèges des processus de base de données via la
+                                        commande Meterpreter getsystem de Metasploit.<br>
+                                    </p>
+                                </div>
+                            </section>
+                        </div>
+                    </section>
+                    <section id="line2" class="section_in">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Configuration de l’agent Wazuh sur Kali-linux<a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                            <div class="col-md-12">
+                                <p>Installez des outils de développement et des compilateurs. Sous Linux, cela peut facilement être fait en
+                                    utilisant le gestionnaire de paquets de votre distribution:
+                                </p>
+                            </div>
+                        <hr>
+                        <section id="line2_1" class="no_margin">
+                            <h4>Pour les distributions basées sur RPM :</h4>
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ yum install make gcc policycoreutils-python automake autoconf libtool
+                                </pre>
+                            <br>
+                            <h4>Pour les distributions basées sur Debian :</h4>
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ apt-get install make gcc libc6-dev curl policycoreutils automake autoconf libtool
+                                </pre>
+                            <br>
+                            <h4>Téléchargez et extrayez la dernière version :</h4>
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ curl -Ls https://github.com/wazuh/wazuh/archive/v3.8.2.tar.gz | tar zx
+                                </pre>
+                            <br>
+
+                            <h4>Exécutez le <code data-claire-semantic="text">install.ssh</code> script. Cela lancera un assistant qui vous guidera tout au long du processus
+                                d'installation à l'aide des sources Wazuh : </h4>
+                            <pre class="brush: html; highlight: [2,4]">
+                               $ cd wazuh- * && ./install.sh
+                            </pre>
+                        </section>
+
+                    <section id="line3" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text"> Mise en place du Vnc :<a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                        <p>
+                            VNC(Virtual Network Computing) est un système qui vous permet de contrôler une machine à distance, et
+                            ce, en prenant le contrôle du clavier et de la souris de cette machine. Cela peut être utile si l'un de vos
+                            proches débute en informatique car vous pouvez voir ce qu'il voit sur son écran.
+                        </p>
+
+                        <pre class="brush: html; highlight: [2,4]">
+                            $ sudo apt install vncviewer
+                            $ ssh «user»@91.134.221.185 -p 2290 -L 5905:localhost:5901
+                            $ su
+                            $ vncserver
+                        </pre>
+                        <li>Sur laptop perso : <code data-claire-semantic="text">vncviewer</code></li>
+                        <li>
+                            <code data-claire-semantic="text">localhost:5</code>
+                        </li>
+                        <li>
+                            <code data-claire-semantic="text">password:VMw9dToL</code>
+                        </li>
+                        <li>
+                            Et on a accès à l’interface graphique de la machine Kali-linux.
+                        </li>
+                        </section>
+                    <section id="line4" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Choix de la base de donnée <a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <h4>MongoDB</h4>
+                                <li>Assurer face à une montée en charge rapide.</li>
+                                <li>Pouvoir restructurer son schéma à la volée.</li>
+                                <li>Un besoin de redondance et de continuité de service.</li>
+                                <li>Une répartition géographique des données.</li>
+                                <li>Un besoin de système de recherche, de stockage de fichier ou d’un système information
+                                    géographique.</li>
+                                <li>Intégration du No_Sql</li>
+                                <li>Intégration de Elastic Search</li>
+                                <li>Intégration de Kibana</li>
+                            </div>
+                        </div>
+                    </section>
+
+                    <section id="line5" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text">Collecte des logs suite aux scans<a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>On utilise l’agent de Wazuh qui est sur la machine Kali-linux.
+                                    Nous allons utiliser ici les capacités de collecte et d’analyse de journaux Wazuh pour respecter les contrôles
+                                    PCI DSS suivants:
+                                    <li>
+                                        <code data-claire-semantic="text">10.2.4</code> : tentatives d'accès logique non valides.
+                                    </li>
+
+                                    <li>
+                                        <code data-claire-semantic="text">10.2.5</code> :  Utilisation et modification des mécanismes d'identification et d'authentification (y compris, sans
+                                        toutefois s'y limiter, la création de nouveaux comptes et l'escalade des privilèges), ainsi que de toutes les
+                                        modifications, ajouts ou suppressions de comptes dotés de privilèges root ou administratifs.
+                                    </li>
+
+                                </p>
+
+                                <p>Ces contrôles nous obligent à consigner les tentatives d'accès logique non valides, plusieurs tentatives de
+                                    connexion non valides (attaques par force brute possibles), des hausses de privilèges, des modifications de
+                                    comptes, etc. Pour cela, nous avons ajouté des balises PCI DSS aux règles d'analyse de journal OSSEC,
+                                    mappage. aux exigences correspondantes. Cela facilite l'analyse et la visualisation de nos alertes liées à la
+                                    norme PCI DSS.</p>
+
+                                <p>nous essayons d'ouvrir le fichier scan.txt.<br>
+                                    Étant donné que notre utilisateur actuel n'a pas d'accès en lecture au fichier, nous <code data-claire-semantic="text">sudo</code> exécutons des
+                                    privilèges élevés.
+                                    En utilisant le  <code data-claire-semantic="text">sudo</code> décodeur d’analyse de journal et les règles, Wazuh générera une alerte pour cette action
+                                    particulière et l’écrira  <code data-claire-semantic="text">alerts.log</code>. En utilisant les balises de règle, nous pouvons voir quelles exigences PCI
+                                    DSS sont spécifiquement liées à cette alerte.
+                                    La sortie JSON étant activée, nous pouvons également voir l'alerte dans <code data-claire-semantic="text">alerts.json</code> :
+                                    Kibana affiche les informations de manière organisée, ce qui permet de filtrer par différents types de champs
+                                    d'alerte, y compris les contrôles de conformité. Nous avons également développé quelques tableaux de bord
+                                    PCI DSS pour une visualisation aisée des alertes pertinentes.</p>
+                            </div>
+                        </div>
+                    </section>
+                    <section id="line6" class="section">
+                        <div class="row">
+                            <div class="col-md-12 left-align">
+                                <h2 class="dark-text"> Configuration du VPN  <a href="#top">#top</a><hr></h2>
+                            </div>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-12">
+                                <p>
+                                    Par défaut, les paramètres réseau n’offrent pas d’option pour établir une connexion VPN. La première étape
+                                    consiste à ajouter l’option OpenVPN au menu des paramètres réseau. Pour ce faire, nous devons installer
+                                    OpenVPN afin de pouvoir ajouter une nouvelle connexion VPN dans les paramètres réseau. Commençons
+                                    l’installation de VPN sur Kali Linux 2016 en utilisant la commande suivante sur une nouvelle session de
+                                    terminal:
+                                </p>
+
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ apt-get install network-manager-openvpn-gnome
+                                </pre>
+
+                                <p>
+                                    Cette commande va installer le gestionnaire de réseau OpenVPN et les paquets supplémentaires qui sont
+                                    nécessaires pour le faire fonctionner correctement. Le paquet network-manager-openvpn-gnome n’installe
+                                    que le protocole OpenVPN, c’est suffisant dans la plupart des cas et certainement si vous utilisez le service
+                                    Golden Frog VPN. Si vous souhaitez installer d’autres protocoles VPN tels que PTTP ou L2TP, vous pouvez
+                                    utiliser la commande suivante pour les installer tous:
+                                </p>
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ apt-get install network-manager-openvpn network-manager-openvpn-gnome network-manager-pptp
+                                    network-manager-pptp-gnome network-manager-strongswan network-manager-vpnc network-managervpnc-gnome
+                                </pre>
+
+                                <p>
+                                    Lorsque l’installation de tous les paquets est terminée, nous pouvons continuer avec l’étape suivante: Ajouter
+                                    une nouvelle connexion VPN et configurer les paramètres de connexion VPN. Commençons par ajouter une
+                                    nouvelle connexion VPN dans les paramètres réseau en accédant au menu des paramètres
+                                    et ouvrez le panneau des paramètres réseau en utilisant le bouton
+                                </p>
+                                <p>
+                                    Maintenant, cliquez sur le signe + dans le coin inférieur gauche pour ajouter une nouvelle connexion et
+                                    cliquez sur “VPN” dans le menu Ajouter une connexion réseau et enfin ajouter une nouvelle connexion OpenVPN
+                                </p>
+                                <p>
+                                    Cela nous amène au menu où nous pouvons définir les paramètres du serveur VPN pour établir une
+                                    connexion. Dans cette étape, nous devons définir la passerelle, les informations d’identification de connexion
+                                    et un certificat d’autorité de certification VyprVPN (CA). Téléchargez d’abord le certificat en utilisant la
+                                    commande suivante:
+                                </p>
+                                <pre class="brush: html; highlight: [2,4]">
+                                    $ wget -O /etc/openvpn/ca.vyprvpn.com.crt
+                                    https://support.goldenfrog.com/hc/en-us/article_attachments/205312238/ca.vyprvpn.com.crt
+                                </pre>
+                                <p>
+                                    Assurez-vous que vous enregistrez le fichier de certificat à l’emplacement suivant:
+                                    <code data-claire-semantic="text">/etc/openvpn/</code>
+                                    <br>
+                                    Maintenant, nous devons spécifier la passerelle et d’autres paramètres:
+                                    <li><b>Nom</b>: VyprVPN OpenVPN</li>
+                                    <li>Rendre disponible aux autres utilisateurs le cas échéant</li>
+                                    <li><b>Passerelle</b>: passerelle de serveur VPN, choisissez l’un de ces serveurs de Golden Frog .</li>
+                                    <li><b>Nom d’utilisateur</b>: L’adresse e-mail utilisée lors de l’inscription à Golden Frog</li>
+                                    <li><b>Mot de passe</b>: le mot de passe de votre compte VyprVPN</li>
+                                    <li><b>Certificat CA</b>: sélectionnez le certificat CA téléchargé à partir du répertoire suivant: <code data-claire-semantic="text">/etc/openvpn/</code></li>
+                                </p>
+                                <p>
+                                    La dernière étape du processus d’installation consiste à activer la compression LZO dans le menu
+                                    avancé. Vous pouvez le faire en cliquant sur le bouton avancé dans le coin en bas à droite de l’écran et
+                                    activer la compression LZO
+                                </p>
+                                <p>
+                                    Maintenant, fermez le menu des options avancées et appliquez les modifications à la nouvelle connexion
+                                    VPN et voyons si cela fonctionne en actionnant le commutateur bleu dans le coin supérieur droit de l’écran
+                                    de connexion VPN pour activer la connexion VPN
+                                </p>
+                                <p>
+                                    Si tous les paramètres sont valides, vous devriez pouvoir configurer une connexion VPN avec succès. Si des
+                                    erreurs surviennent, vous serez averti par un message ressemblant à ceci: L’activation de la connexion réseau
+                                    a échoué. Si ce message d’erreur s’affiche, vous devez vérifier les journaux à l’aide de la commande suivante
+                                    dans le terminal: <code data-claire-semantic="text">journalctl -n100</code>
+                                </p>
+                                <p>
+                                    Cela ouvrira les 100 dernières lignes du journal. Toute erreur dans le journal sera marquée en rouge et devrait
+                                    éclaircir les raisons pour lesquelles l’erreur est survenue. Dans l’exemple suivant, il y avait un problème avec
+                                    le certificat téléchargé, qui a été résolu en téléchargeant à nouveau le certificat mais manuellement cette fois
+                                    en utilisant un navigateur
+                                </p>
+                            </div>
+                        </div>
+                        <hr>
+                    </section>
+                    </section>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="js/jquery.min.js"></script>
+    <script src="js/bootstrap.min.js"></script>
+    <script src="js/retina.js"></script>
+    <script src="js/jquery.fitvids.js"></script>
+    <script src="js/wow.js"></script>
+    <script src="js/jquery.prettyPhoto.js"></script>
+
+    <script src="js/custom.js"></script>
+    <script src="js/main.js"></script>
+
+    <script src="js/syntax-highlighter/scripts/shCore.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushXml.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushCss.js"></script>
+    <script src="js/syntax-highlighter/scripts/shBrushJScript.js"></script>
+
+</body>
+
+</html>
