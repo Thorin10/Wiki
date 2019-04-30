@@ -87,6 +87,7 @@
                             <li><a href="#line4">Choix de la base de donnée</a></li>
                             <li><a href="#line5">Collecte des logs suite aux scans</a></li>
                             <li><a href="#line6">Configuration du VPN</a></li>
+                            <li><a href="#line7">Lancement des scripts de scan</a></li>
                         </ul>
                     </nav >
                 </div>
@@ -450,9 +451,27 @@
                                 </p>
                             </div>
                         </div>
-                        <hr>
                     </section>
+                        <section id="line7" class="section">
+                            <div class="row">
+                                <div class="col-md-12 left-align">
+                                    <h2 class="dark-text"> Lancement des scripts de scan <a href="#top">#top</a><hr></h2>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                    <p>
+                                        On renseigne son IP de son serveur et il scan tout les ports ouverts sur le serveur et avec Iptables ont bloquent ceux qui ne servent à rien.
+                                        Pour le lancer :
+                                        <pre class="brush: html; highlight: [2,4]">
+                                            python3 scan.py
+                                        </pre>
+                                    </p>
+                                </div>
+                            </div>
+                        </section>
                     </section>
+                    <hr>
                 </div>
             </div>
         </div>
